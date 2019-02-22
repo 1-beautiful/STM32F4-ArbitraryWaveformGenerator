@@ -54,7 +54,7 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN Private defines */
-#define SAMPLE_SIZE_FREQ 104
+#define SAMPLE_SIZE_FREQ 80
 
 /* USER CODE END Private defines */
 

@@ -53,14 +53,14 @@
 extern DAC_HandleTypeDef hdac;
 
 /* USER CODE BEGIN Private defines */
-#define SAMPLE_SIZE_UUS 104
+#define SAMPLE_SIZE_UUS 80
 
 /* USER CODE END Private defines */
 
 void MX_DAC_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void DAC_Start_DMA_WaveformUus27Ohms(void);
+void DAC_Start_DMA_WaveformUus(void);
 
 /* USER CODE END Prototypes */
 

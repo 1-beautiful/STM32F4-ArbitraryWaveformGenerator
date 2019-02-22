@@ -42,17 +42,15 @@
 
 /* USER CODE BEGIN 0 */
 /* Private variables ---------------------------------------------------------*/
-const uint16_t aWaveformUus27Ohms[SAMPLE_SIZE_UUS] = {61, 122, 183, 183, 183,
-    244, 305, 305, 305, 366, 427, 427, 427, 488, 549, 549, 549, 671, 732, 732,
-    732, 793, 854, 854, 854, 915, 976, 976, 976, 1037, 1098, 1098, 1098, 1159,
-    1220, 1220, 1220, 1281, 1342, 1342, 1342, 1403, 1464, 1464, 1464, 1525,
-    1586, 1586, 1586, 1647, 1708, 1708, 1708, 1647, 1586, 1586, 1586, 1525,
-    1464, 1464, 1464, 1403, 1342, 1342, 1342, 1281, 1220, 1220, 1220, 1159,
-    1098, 1098, 1098, 1037, 976, 976, 976, 915, 854, 854, 854, 793, 732, 732,
-    732, 671, 549, 549, 549, 488, 427, 427, 427, 366, 305, 305, 305, 244, 183,
-    183, 183, 122, 61, 61};
+const uint16_t aWaveformUus27Ohms[SAMPLE_SIZE_UUS] = {61, 122, 183, 183, 244,
+    305, 366, 366, 427, 488, 549, 549, 610, 671, 732, 732, 793, 854, 915, 915,
+    976, 1037, 1098, 1098, 1159, 1220, 1281, 1281, 1342, 1403, 1464, 1464,
+    1525, 1586, 1647, 1647, 1708, 1769, 1830, 1830, 1891, 1952, 2013, 2013,
+    2074, 2135, 2196, 2196, 2257, 2318, 2379, 2379, 2440, 2501, 2562, 2562,
+    2623, 2684, 2745, 2745, 2806, 2867, 2928, 2928, 2989, 3050, 3111, 3111,
+    3172, 3233, 3294, 3294, 3355, 3416, 3477, 3477, 3538, 3599, 3660, 3660};
 
-const uint16_t aWaveformUus25Ohms[SAMPLE_SIZE_UUS] = {0};
+const uint16_t aWaveformUus30Ohms[SAMPLE_SIZE_UUS] = {0};
 
 /* USER CODE END 0 */
 
@@ -181,11 +179,11 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* dacHandle)
   * @param None
   * @retval None
   */
-void DAC_Start_DMA_WaveformUus27Ohms(void)
+void DAC_Start_DMA_WaveformUus(void)
 {
 
   /*## Enable DAC Channel1 and associated DMA ################################*/
-  if(HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_2, (uint32_t*)aWaveformUus27Ohms, SAMPLE_SIZE_UUS, DAC_ALIGN_12B_R) != HAL_OK)
+  if(HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)aWaveformUus27Ohms, SAMPLE_SIZE_UUS, DAC_ALIGN_12B_R) != HAL_OK)
   {
     /* Start DMA Error */
     Error_Handler();

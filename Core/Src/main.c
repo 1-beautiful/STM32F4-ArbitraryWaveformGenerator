@@ -120,12 +120,12 @@ int main(void)
   /*## Enable TIM1 peripheral counter to generate PWM (Freq signal) #########*/
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
-  /*## Enable DAC1 ##########################################################*/
-  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1410);
-  HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
+  /*## Enable DAC2 ##########################################################*/
+  HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 1410);
+  HAL_DAC_Start(&hdac, DAC_CHANNEL_2);
 
   /*## Prepare DMA1 to DAC1 transfers #######################################*/
-  DAC_Start_DMA_WaveformUus27Ohms();
+  DAC_Start_DMA_WaveformUus();
 
   /*## Enable TIM6 peripheral counter to generate the 100ms time base #######*/
   HAL_TIM_Base_Start_IT(&htim6);
