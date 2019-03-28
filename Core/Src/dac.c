@@ -42,23 +42,22 @@
 
 /* USER CODE BEGIN 0 */
 /* Private variables ---------------------------------------------------------*/
-const uint16_t aWaveformUus27Ohms[SAMPLE_SIZE_UUS] = {1443, 1473, 1504, 1504,
-    1504, 1534, 1565, 1565, 1565, 1596, 1626, 1626, 1626, 1657, 1687, 1687,
-    1687, 1749, 1779, 1779, 1779, 1810, 1840, 1840, 1840, 1871, 1901, 1901,
-    1901, 1932, 1963, 1963, 1963, 1993, 2024, 2024, 2024, 2054, 2085, 2085,
-    2085, 2116, 2146, 2146, 2146, 2177, 2207, 2207, 2207, 2238, 2269, 2269,
-    2269, 2238, 2207, 2207, 2207, 2177, 2146, 2146, 2146, 2116, 2085, 2085,
-    2085, 2054, 2024, 2024, 2024, 1993, 1963, 1963, 1963, 1932, 1901, 1901,
-    1901, 1871, 1840, 1840, 1840, 1810, 1779, 1779, 1779, 1749, 1687, 1687,
-    1687, 1657, 1626, 1626, 1626, 1596, 1565, 1565, 1565, 1534, 1504, 1504,
-    1504, 1473, 1443, 1443};
+const uint16_t aWaveformUus27Ohms[SAMPLE_SIZE_UUS] = {61, 122, 183, 183, 183,
+    244, 305, 305, 305, 366, 427, 427, 427, 488, 549, 549, 549, 671, 732, 732,
+    732, 793, 854, 854, 854, 915, 976, 976, 976, 1037, 1098, 1098, 1098, 1159,
+    1220, 1220, 1220, 1281, 1342, 1342, 1342, 1403, 1464, 1464, 1464, 1525,
+    1586, 1586, 1586, 1647, 1708, 1708, 1708, 1647, 1586, 1586, 1586, 1525,
+    1464, 1464, 1464, 1403, 1342, 1342, 1342, 1281, 1220, 1220, 1220, 1159,
+    1098, 1098, 1098, 1037, 976, 976, 976, 915, 854, 854, 854, 793, 732, 732,
+    732, 671, 549, 549, 549, 488, 427, 427, 427, 366, 305, 305, 305, 244, 183,
+    183, 183, 122, 61, 61};
 
 const uint16_t aWaveformUus25Ohms[SAMPLE_SIZE_UUS] = {0};
 
 /* USER CODE END 0 */
 
 DAC_HandleTypeDef hdac;
-DMA_HandleTypeDef hdma_dac2;
+DMA_HandleTypeDef hdma_dac1;
 
 /* DAC init function */
 void MX_DAC_Init(void)
@@ -74,7 +73,7 @@ void MX_DAC_Init(void)
   }
   /**DAC channel OUT1 config 
   */
-  sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
+  sConfig.DAC_Trigger = DAC_TRIGGER_T6_TRGO;
   sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
   if (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_1) != HAL_OK)
   {
@@ -82,7 +81,7 @@ void MX_DAC_Init(void)
   }
   /**DAC channel OUT2 config 
   */
-  sConfig.DAC_Trigger = DAC_TRIGGER_T6_TRGO;
+  sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
   if (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
@@ -113,23 +112,23 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* dacHandle)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* DAC DMA Init */
-    /* DAC2 Init */
-    hdma_dac2.Instance = DMA1_Stream6;
-    hdma_dac2.Init.Channel = DMA_CHANNEL_7;
-    hdma_dac2.Init.Direction = DMA_MEMORY_TO_PERIPH;
-    hdma_dac2.Init.PeriphInc = DMA_PINC_DISABLE;
-    hdma_dac2.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_dac2.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
-    hdma_dac2.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
-    hdma_dac2.Init.Mode = DMA_CIRCULAR;
-    hdma_dac2.Init.Priority = DMA_PRIORITY_LOW;
-    hdma_dac2.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
-    if (HAL_DMA_Init(&hdma_dac2) != HAL_OK)
+    /* DAC1 Init */
+    hdma_dac1.Instance = DMA1_Stream5;
+    hdma_dac1.Init.Channel = DMA_CHANNEL_7;
+    hdma_dac1.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_dac1.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_dac1.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_dac1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+    hdma_dac1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    hdma_dac1.Init.Mode = DMA_CIRCULAR;
+    hdma_dac1.Init.Priority = DMA_PRIORITY_LOW;
+    hdma_dac1.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+    if (HAL_DMA_Init(&hdma_dac1) != HAL_OK)
     {
       Error_Handler();
     }
 
-    __HAL_LINKDMA(dacHandle,DMA_Handle2,hdma_dac2);
+    __HAL_LINKDMA(dacHandle,DMA_Handle1,hdma_dac1);
 
     /* DAC interrupt Init */
     HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 0, 0);
@@ -158,7 +157,7 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* dacHandle)
     HAL_GPIO_DeInit(GPIOA, DAC_OUT1_Uus_Pin|DAC_OUT2_Ius_Pin);
 
     /* DAC DMA DeInit */
-    HAL_DMA_DeInit(dacHandle->DMA_Handle2);
+    HAL_DMA_DeInit(dacHandle->DMA_Handle1);
 
     /* DAC interrupt Deinit */
   /* USER CODE BEGIN DAC:TIM6_DAC_IRQn disable */
