@@ -42,7 +42,14 @@
 
 /* USER CODE BEGIN 0 */
 /* Private variables ---------------------------------------------------------*/
-const uint16_t aSweepFreqValForDf11[SAMPLE_SIZE_FREQ] = {0};
+const uint16_t aSweepFreqValForDf11[SAMPLE_SIZE_FREQ] = {6109, 6105, 6100,
+    6096, 6096, 6091, 6087, 6082, 6082, 6078, 6073, 6069, 6069, 6064, 6060,
+    6056, 6056, 6051, 6047, 6042, 6042, 6038, 6033, 6029, 6029, 6025, 6020,
+    6016, 6016, 6011, 6007, 6002, 6002, 5998, 5994, 5989, 5989, 5985, 5980,
+    5980, 5980, 5980, 5985, 5989, 5989, 5994, 5998, 6002, 6002, 6007, 6011,
+    6016, 6016, 6020, 6025, 6029, 6029, 6033, 6038, 6042, 6042, 6047, 6051,
+    6056, 6056, 6060, 6064, 6069, 6069, 6073, 6078, 6082, 6082, 6087, 6091,
+    6096, 6096, 6100, 6105, 6109};
 
 const uint16_t aSweepFreqValForDf13[SAMPLE_SIZE_FREQ] = {6109, 6104, 6099,
     6093, 6093, 6088, 6083, 6077, 6077, 6072, 6067, 6062, 6062, 6056, 6051,
@@ -52,8 +59,6 @@ const uint16_t aSweepFreqValForDf13[SAMPLE_SIZE_FREQ] = {6109, 6104, 6099,
     5999, 5999, 6004, 6009, 6015, 6015, 6020, 6025, 6030, 6030, 6035, 6041,
     6046, 6046, 6051, 6056, 6062, 6062, 6067, 6072, 6077, 6077, 6083, 6088,
     6093, 6093, 6099, 6104, 6109};
-
-const uint16_t aSweepFreqValForDf20[SAMPLE_SIZE_FREQ] = {0};
 
 /* USER CODE END 0 */
 
@@ -246,7 +251,7 @@ void PWM_ChangeFrequencyOfTim1Ch1(void)
 {
   static uint8_t uxIndex=0;
 
-  __HAL_TIM_SET_AUTORELOAD(&htim1, aSweepFreqValForDf13[uxIndex]);
+  __HAL_TIM_SET_AUTORELOAD(&htim1, aSweepFreqValForDf11[uxIndex]);
 
   uxIndex++;
   if(uxIndex >= SAMPLE_SIZE_FREQ)

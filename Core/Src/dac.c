@@ -50,7 +50,13 @@ const uint16_t aWaveformUus27Ohms[SAMPLE_SIZE_UUS] = {61, 122, 183, 183, 244,
     2623, 2684, 2745, 2745, 2806, 2867, 2928, 2928, 2989, 3050, 3111, 3111,
     3172, 3233, 3294, 3294, 3355, 3416, 3477, 3477, 3538, 3599, 3660, 3660};
 
-const uint16_t aWaveformUus30Ohms[SAMPLE_SIZE_UUS] = {0};
+const uint16_t aWaveformUus25Ohms[SAMPLE_SIZE_UUS] = {56, 113, 169, 169,
+    226, 282, 339, 339, 395, 452, 508, 508, 565, 621, 678, 678, 734, 791, 847,
+    847, 904, 960, 1017, 1017, 1073, 1130, 1186, 1186, 1243, 1299, 1356, 1356,
+    1412, 1468, 1525, 1525, 1581, 1638, 1694, 1694, 1751, 1807, 1864, 1864,
+    1920, 1977, 2033, 2033, 2090, 2146, 2203, 2203, 2259, 2316, 2372, 2372,
+    2429, 2485, 2542, 2542, 2598, 2655, 2711, 2711, 2768, 2824, 2880, 2880,
+    2937, 2993, 3050, 3050, 3106, 3163, 3219, 3219, 3276, 3332, 3389, 3389};
 
 /* USER CODE END 0 */
 
@@ -183,7 +189,7 @@ void DAC_Start_DMA_WaveformUus(void)
 {
 
   /*## Enable DAC Channel1 and associated DMA ################################*/
-  if(HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)aWaveformUus27Ohms, SAMPLE_SIZE_UUS, DAC_ALIGN_12B_R) != HAL_OK)
+  if(HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)aWaveformUus25Ohms, SAMPLE_SIZE_UUS, DAC_ALIGN_12B_R) != HAL_OK)
   {
     /* Start DMA Error */
     Error_Handler();
