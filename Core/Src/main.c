@@ -120,7 +120,7 @@ int main(void)
   /*## Enable TIM1 peripheral counter to generate PWM (Freq signal) #########*/
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
-  /*## Enable DAC2 ##########################################################*/
+  /*## Enable DAC1 ##########################################################*/
   HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1410);
   HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
 
@@ -136,7 +136,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    //TODO reset ARPE bit of CR1 register for disabling buffer of the ARR register
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
